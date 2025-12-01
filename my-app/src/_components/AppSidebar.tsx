@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui";
 import { useRouter } from "next/navigation";
-import { ArticleType } from "@/lib/types";
 import useSWR from "swr";
 import { TiDelete } from "react-icons/ti";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { ArticleType } from "@/lib/types";
 
 export function AppSidebar() {
   const [open, setOpen] = useState<boolean>(false);
@@ -49,7 +49,7 @@ export function AppSidebar() {
   };
 
   return (
-    <div className="w-fit mt-14 flex items-stretch gap-2 p-4">
+    <div className="w-fit flex h-screen items-stretch gap-2 p-4 bg-gray-100">
       {open && (
         <div className="max-w-55 flex flex-col gap-2">
           <div className="text-xl leading-7 font-semibold text-foreground py-1.5">
@@ -57,7 +57,7 @@ export function AppSidebar() {
           </div>
 
           <div className="flex flex-col gap-1">
-            {allArticles.map((article) => (
+            {/* {allArticles.map((article) => (
               <div key={article.id} className="flex items-center gap-1">
                 <Button
                   onClick={() => {
@@ -78,7 +78,7 @@ export function AppSidebar() {
                   <TiDelete size={16} />
                 </Button>
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       )}
@@ -86,9 +86,9 @@ export function AppSidebar() {
       <Button
         onClick={handleSidebar}
         variant={"ghost"}
-        className="w-10 h-10 px-2 cursor-pointer"
+        className="min-w-10 min-h-10 px-2 cursor-pointer"
       >
-        <img src="/sidebar.svg" alt="" />
+        <img src="/History.svg" alt="" />
       </Button>
     </div>
   );
