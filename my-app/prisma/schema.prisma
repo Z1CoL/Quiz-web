@@ -7,17 +7,6 @@ datasource db {
   provider = "postgresql"
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model users {
-  firstname String?  @db.VarChar(50)
-  lastname  String?  @db.VarChar(50)
-  age       Int?
-  gender    String?  @db.VarChar(50)
-  isactive  Boolean?
-
-  @@ignore
-}
-
 model article {
   id        Int       @id @default(autoincrement())
   title     String?
@@ -38,4 +27,15 @@ model quiz {
   updatedat    DateTime? @default(now()) @db.Timestamp(6)
   quizattempts String[]
   userscores   String[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model users {
+  firstname String?  @db.VarChar(50)
+  lastname  String?  @db.VarChar(50)
+  age       Int?
+  gender    String?  @db.VarChar(50)
+  isactive  Boolean?
+
+  @@ignore
 }
