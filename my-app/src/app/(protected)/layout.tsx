@@ -23,8 +23,6 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
-import Navigation from "@/_components/Navigation";
-import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,9 +53,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <header className="flex items-center p-4 gap-4 h-16 justify-between border-b-4">
-            <Link href={"/"}>
-              <h1 className="font-semibold text-6">Quiz App</h1>
-            </Link>
+            <h1>Quiz app</h1>
 
             <div className="flex gap-4">
               <SignedOut>

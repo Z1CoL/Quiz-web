@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { BackToMainPage } from "./BackToMainPage";
 
 export default function HomeScreen() {
   const [title, setTitle] = useState("");
@@ -21,10 +22,7 @@ export default function HomeScreen() {
 
       const data = await response.json();
 
-      
-
       setSummary(data.summary);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -63,10 +61,7 @@ export default function HomeScreen() {
               Generate summary
             </Button>
 
-
-            <p>
-              {summary}
-            </p>
+            <p>{summary}</p>
           </div>
         </div>
       </div>
