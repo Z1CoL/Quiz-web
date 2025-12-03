@@ -65,6 +65,7 @@ export type QuizAllAttemptsType = {
   updatedat: string;
   scores: QuizAttemptScoreType[];
 };
+
 export type QuizAttemptScoreType = {
   score: number;
   useranswer: string;

@@ -20,4 +20,18 @@ export const POST = async (request: NextRequest) => {
       { status: 400 }
     );
   }
+
+  const article = await prisma.article.create({
+    data: {
+      title: title,
+      content: content,
+      summary: summary,
+      userid: userClerkId,
+    },
+  });
+
+  return NextResponse.json({
+    message: "Article added to DB successfully",
+    data: article,
+  });
 };

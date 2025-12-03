@@ -26,6 +26,7 @@ export async function POST(request: NextResponse) {
     - Maximum length: 60 words
      
      Summary:`,
+     
   });
 
   const summary = response.text;
@@ -35,4 +36,3 @@ export async function POST(request: NextResponse) {
     summary: summary,
   });
 }
-
