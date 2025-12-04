@@ -10,16 +10,22 @@ import {
 } from "@clerk/nextjs";
 import { ArticleProvider } from "@/app/_providers/ArticleProviders";
 import { AppSidebar } from "@/_components/AppSidebar";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export default function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
+
   return (
     <ArticleProvider>
       <header className="flex items-center p-4 gap-4 h-16 justify-between border-b-4">
-        <h1>Quiz app</h1>
+<></>
+          Quiz app
+
         <div className="flex gap-4">
           <SignedOut>
             <SignInButton />

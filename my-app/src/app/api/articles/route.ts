@@ -14,12 +14,12 @@ export const POST = async (request: NextRequest) => {
   const body = await request.json();
   const { title, content, summary, userClerkId } = body;
 
-  // if (!title || !content || !summary) {
-  //   return NextResponse.json(
-  //     { error: "Missing required fields!" },
-  //     { status: 400 }
-  //   );
-  // }
+  if (!title || !content || !summary) {
+    return NextResponse.json(
+      { error: "Missing required fields!" },
+      { status: 400 }
+    );
+  }
 
   const article = await prisma.article.create({
     data: {

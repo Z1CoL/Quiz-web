@@ -1,12 +1,13 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { mutate } from "swr";
+import { ArticleType } from "@/lib/types";
 
 type ArticleContextType = {
+  data: string;
   title: string;
   setTitle: (title: string) => void;
   content: string;
@@ -23,8 +24,8 @@ export const ArticleProvider = ({
 }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const { user } = useUser();
   const router = useRouter();
+  const [article, setArticle] = useState<ArticleType>();
 
   const generateSummary = async () => {
     if (!title || !content) return toast.warning("All fields required!");
@@ -37,18 +38,9 @@ export const ArticleProvider = ({
 
     if (!response.ok) return toast.error("Failed to generate summary");
 
-    const { text } = await response.json();
-
-    const res = await fetch("/api/articles", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title,
-        content,
-        summary: text,
-        userClerkId: user?.id,
-      }),
-    });
+    const { data } = await response.json();
+    setArticle(data);
+    console.log({ data }, "DATA BE");
 
     mutate("articles");
     toast.success("Article added");
@@ -56,13 +48,13 @@ export const ArticleProvider = ({
     setTitle("");
     setContent("");
 
-    const { data } = await res.json();
+    // const { data } = await res.json();
     if (data?.id) router.push(`/article/${data.id}`);
   };
 
   return (
     <ArticleContext.Provider
-      value={{ title, setTitle, content, setContent, generateSummary }}
+      value={{ title, setTitle, content, setContent, generateSummary, article }}
     >
       {children}
     </ArticleContext.Provider>

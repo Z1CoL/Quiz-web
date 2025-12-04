@@ -3,6 +3,7 @@
 import { SeeMoreContent } from "@/_components/SeeMoreContent";
 import { SummarizedContentComp } from "@/_components/SummarizedContent";
 import { useArticle } from "@/app/_hooks/use-article";
+import { useData } from "@/app/_providers/ArticleProviders";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { useParams, useRouter } from "next/navigation";
@@ -42,20 +43,22 @@ const ArticlePage = () => {
     router.push(`/article/${articleId}/quizzes`);
   };
 
+  const { title, setTitle, content, setContent, generateSummary } =
+    useData();
+
   return (
     <>
       <div className="min-w-full min-h-full bg-secondary flex justify-center">
         <div className="mt-26 flex flex-col mx-64 gap-6">
-          <Button
-            onClick={() => router.push("/")}
-            variant={"outline"}
-            size={"lg"}
-            className="w-fit"
-          >
-            <LuChevronLeft size={16} />
-          </Button>
-
           <div className="bg-background flex flex-col p-7 rounded-lg h-fit gap-5 text-foreground font-semibold border border-border">
+            <Button
+              onClick={() => router.push("/")}
+              variant={"outline"}
+              size={"lg"}
+              className="w-fit"
+            >
+              <LuChevronLeft size={16} />
+            </Button>
             <div className="flex gap-2 items-center">
               <img src="/article-icon.svg" alt="" className="w-6 h-6" />
               <div className="text-2xl leading-8 font-semibold text-foreground">
@@ -64,7 +67,7 @@ const ArticlePage = () => {
             </div>
 
             {selectedArticle && (
-              <SummarizedContentComp selectedArticle={selectedArticle} />
+              <SummarizedContentComp selectedArticle={article} />
             )}
 
             <div className="flex justify-between">

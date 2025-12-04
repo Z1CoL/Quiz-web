@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/prisma";
 import { GoogleGenAI } from "@google/genai";
 import next from "next";
 import { NextResponse } from "next/server";
@@ -16,23 +17,31 @@ export async function POST(request: NextResponse) {
 
   const response = await ai.models.generateContent({
     model: "gemini-2.0-flash",
-    contents: `Please provide a concise, natural summary of the following article: 
+    contents: `Please provide a concise, natural summary of the following article:
     Title: ${title}
-    Content: ${content}  
+    Content: ${content}
      The summary should:
     - Focus on the article's core message and main points.
     - Flow naturally as a paragraph, not as a list or outline.
     - Contain enough meaningful details to allow relevant questions to be generated from it later.
     - Maximum length: 60 words
-     
+
      Summary:`,
-     
   });
 
   const summary = response.text;
 
+  const article = await prisma.article.create({
+    data: {
+      title: title,
+      content: content,
+      summary: response.text,
+    },
+  });
+
   return NextResponse.json({
     message: "summary generated successfully",
-    summary: summary,
+    data: article,
   });
 }
+
