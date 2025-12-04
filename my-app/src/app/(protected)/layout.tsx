@@ -9,6 +9,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { ArticleProvider } from "@/app/_providers/ArticleProviders";
+import { AppSidebar } from "@/_components/AppSidebar";
 
 export default function ProtectedLayout({
   children,
@@ -33,7 +34,14 @@ export default function ProtectedLayout({
           </SignedIn>
         </div>
       </header>
-      {children}
+      <>
+        <div className="flex">
+          <div className="border-r-4 ">
+            <AppSidebar />
+          </div>
+          {children}
+        </div>
+      </>
     </ArticleProvider>
   );
 }

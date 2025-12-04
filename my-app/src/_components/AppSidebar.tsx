@@ -57,7 +57,7 @@ export function AppSidebar() {
           </div>
 
           <div className="flex flex-col gap-1">
-            {/* {allArticles.map((article) => (
+            {allArticles.map((article) => (
               <div key={article.id} className="flex items-center gap-1">
                 <Button
                   onClick={() => {
@@ -78,7 +78,7 @@ export function AppSidebar() {
                   <TiDelete size={16} />
                 </Button>
               </div>
-            ))} */}
+            ))}
           </div>
         </div>
       )}

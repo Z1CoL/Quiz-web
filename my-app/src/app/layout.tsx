@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs"; // ✅ ClerkProvider-г импортлох
+import { AppSidebar } from "@/_components/AppSidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +30,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* ✅ Энд ClerkProvider-г оруулж байна */}
         <ClerkProvider>{children}</ClerkProvider>
       </body>
     </html>
