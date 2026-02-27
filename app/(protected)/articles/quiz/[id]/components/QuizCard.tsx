@@ -1,0 +1,56 @@
+"use client";
+import { quiz } from "@/app/lib/type";
+import { Button } from "@/components/ui/button";
+
+export interface Attempt {
+  givenAns: string;
+  quizId: number;
+}
+export function QuizCard(props: {
+  quiz: quiz;
+  setQIndex: React.Dispatch<React.SetStateAction<number>>;
+  setCorrectCount: React.Dispatch<React.SetStateAction<number>>;
+  qIndex: number;
+  setAttempt: React.Dispatch<React.SetStateAction<Attempt[]>>;
+}) {
+  const { question, options, answer, id } = props.quiz;
+  const { setQIndex, setCorrectCount, qIndex, setAttempt } = props;
+  const ansCheck = (ans: string) => {
+    if (ans == answer) {
+      console.log("true");
+      setCorrectCount((prev: number) => prev + 1);
+    }
+  };
+  return (
+    <div className="">
+      <div className="flex justify-between">
+        <p>{question} </p>
+        <p className="flex items-center gap-1">
+          <span className="text-[24px] ">{qIndex + 1} </span>
+          <span className="text-[#737373] ">/ 5</span>
+        </p>
+      </div>
+      <div className="grid grid-cols-2 gap-3 ">
+        {options.length > 0 &&
+          options.map((option: string, i: number) => {
+            return (
+              <Button
+                key={i}
+                className="w-full "
+                variant="outline"
+                onClick={() => {
+                  setQIndex((prev: number) => prev + 1);
+                  ansCheck(String(i));
+                  setAttempt((prev: Attempt[]) => {
+                    return [...prev, { givenAns: String(i), quizId: id }];
+                  });
+                }}
+              >
+                {option}
+              </Button>
+            );
+          })}
+      </div>
+    </div>
+  );
+}
