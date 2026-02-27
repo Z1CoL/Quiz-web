@@ -1,43 +1,30 @@
 import prisma from "@/app/lib/prisma";
-import { axiosInstance } from "@/app/lib/utils";
+import axiosInstance from "@/lib/axios";
+
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async () => {
-  const { userId } = await auth();
-  try {
-    const res = await prisma.article.findMany({
-      where: {
-        userid: userId,
-      },
-    });
-    console.log("filtered history", res);
-
-    return NextResponse.json(res);
-  } catch (error) {
-    return NextResponse.json(error);
-  }
-};
-
 export const POST = async (req: NextRequest) => {
-  //   const { isLoaded, isSignedIn, userId } = useAuth();
   const { userId } = await auth();
   const { title, content } = await req.json();
-  console.log(content);
-  const res = await axiosInstance.post("/summarize", { content: content });
-  console.log("summary", res.data.summary);
 
+  // 1. AI summary авах
+  const res = await axiosInstance.post("/api/summarize", { content });
+  const summary = res.data.summary;
+
+  // 2. Database-д хадгалах
   try {
     const resp = await prisma.article.create({
       data: {
-        title: title,
-        content: content,
-        summary: res.data.summary,
+        title,
+        content,
+        summary,
         userid: userId,
       },
     });
     return NextResponse.json(resp);
   } catch (error) {
-    return NextResponse.json(error);
+    console.error("DB create error:", error);
+    return NextResponse.json({ error: "DB create failed" }, { status: 500 });
   }
 };

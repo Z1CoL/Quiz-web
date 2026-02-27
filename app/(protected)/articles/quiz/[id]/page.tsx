@@ -16,7 +16,7 @@ export default function Home({ params }: { params: Promise<{ id: string }> }) {
   const [id, setId] = useState<string | undefined>();
 
   const quizSubmitHandle = async () => {
-    await axiosInstance.put("/quizCrud", { attempt });
+    await axiosInstance.put("/api/quizCrud", { attempt });
   };
   useEffect(() => {
     const doSomething = async () => {

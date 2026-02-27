@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Loader2, Sparkles, FileText } from "lucide-react";
 import axiosInstance from "@/app/lib/axois";
 
+
 export default function Home() {
   const router = useRouter();
   const [title, setTitle] = useState("");
@@ -41,7 +42,7 @@ export default function Home() {
         content: content,
       });
       const id = response.data.id;
-      router.push(`/api/articles/summary/${id}`);
+      router.push(`/articles/summary/${id}`);
     } catch (error) {
       console.error("Generation failed:", error);
       // 4. Stop loading if there is an error

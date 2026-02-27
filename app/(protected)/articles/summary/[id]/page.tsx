@@ -44,7 +44,7 @@ export default function Home({ params }: { params: Promise<{ id: string }> }) {
   const handleTakeQuiz = async () => {
     setQuizLoading(true);
     try {
-      const response = await axiosInstance.post("api/quiz", {
+      const response = await axiosInstance.post("/api/quiz", {
         content: summary.summary,
       });
 
