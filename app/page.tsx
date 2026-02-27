@@ -1,6 +1,4 @@
 "use client";
-import Image from "next/image";
-import { axiosInstance } from "./lib/utils";
 import { useEffect, useState } from "react";
 import {
   SignedIn,
