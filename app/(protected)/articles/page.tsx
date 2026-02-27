@@ -36,12 +36,12 @@ export default function Home() {
     // 3. Start loading
     setIsLoading(true);
     try {
-      const response = await axiosInstance.post("/api/article", {
+      const response = await axiosInstance.post("api/article", {
         title: title,
         content: content,
       });
       const id = response.data.id;
-      router.push(`/api/articles/summary/${id}`);
+      router.push(`/articles/summary/${id}`);
     } catch (error) {
       console.error("Generation failed:", error);
       // 4. Stop loading if there is an error
