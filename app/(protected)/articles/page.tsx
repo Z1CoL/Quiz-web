@@ -10,6 +10,7 @@ import { Loader2, Sparkles, FileText } from "lucide-react";
 import axiosInstance from "@/app/lib/axois";
 
 
+
 export default function Home() {
   const router = useRouter();
   const [title, setTitle] = useState("");

@@ -71,25 +71,25 @@ export function AppSidebar() {
               <SidebarMenu>
                 {isLoading
                   ? Array.from({ length: 6 }).map((_, i) => (
-                      <SidebarMenuItem key={i} className="mb-2">
-                        <Skeleton className="h-9 w-full rounded-md" />
-                      </SidebarMenuItem>
-                    ))
+                    <SidebarMenuItem key={i} className="mb-2">
+                      <Skeleton className="h-9 w-full rounded-md" />
+                    </SidebarMenuItem>
+                  ))
                   : history?.map((item) => (
-                      <SidebarMenuItem key={item.id}>
-                        <SidebarMenuButton
-                          onClick={() =>
-                            router.push(`/articles/summary/${item.id}`)
-                          }
-                          isActive={params?.id === String(item.id)}
-                          className="hover:bg-accent hover:text-accent-foreground py-5"
-                        >
-                          <span className="truncate text-sm font-medium">
-                            {item.title}
-                          </span>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    ))}
+                    <SidebarMenuItem key={item.id}>
+                      <SidebarMenuButton
+                        onClick={() =>
+                          router.push(`/articles/summary/${item.id}`)
+                        }
+                        isActive={params?.id === String(item.id)}
+                        className="hover:bg-accent hover:text-accent-foreground py-5"
+                      >
+                        <span className="truncate text-sm font-medium">
+                          {item.title}
+                        </span>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
               </SidebarMenu>
             </ScrollArea>
           </SidebarGroup>
