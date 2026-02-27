@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { axiosInstance } from "@/app/lib/utils";
+
 import { article } from "@/app/lib/type";
 import {
   Sidebar,
@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
+import axiosInstance from "@/app/lib/axois";
 
 export function AppSidebar() {
   const router = useRouter();
@@ -35,7 +36,7 @@ export function AppSidebar() {
   const getHistory = async () => {
     try {
       setIsLoading(true);
-      const response = await axiosInstance.get("/article");
+      const response = await axiosInstance.get("/api/article");
       const data = response.data.map((art: article) => ({
         title: art.title,
         id: art.id,

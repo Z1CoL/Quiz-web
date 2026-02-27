@@ -1,6 +1,5 @@
 "use client";
 
-import { axiosInstance } from "@/app/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -8,6 +7,7 @@ import React, { use, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { Sparkles, BookOpen } from "lucide-react";
 import { article, quiz } from "@/app/lib/type";
+import axiosInstance from "@/app/lib/axois";
 
 export default function Home({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -24,7 +24,7 @@ export default function Home({ params }: { params: Promise<{ id: string }> }) {
   useEffect(() => {
     const getSummary = async () => {
       try {
-        const data = await axiosInstance.get("/article");
+        const data = await axiosInstance.get("/api/article");
         const filtered = data.data.find(
           (article: article) => (article.id as unknown as string) == id
         );
@@ -44,7 +44,7 @@ export default function Home({ params }: { params: Promise<{ id: string }> }) {
   const handleTakeQuiz = async () => {
     setQuizLoading(true);
     try {
-      const response = await axiosInstance.post("/quiz", {
+      const response = await axiosInstance.post("api/quiz", {
         content: summary.summary,
       });
 
@@ -53,7 +53,7 @@ export default function Home({ params }: { params: Promise<{ id: string }> }) {
       // Using Promise.all is faster than a for-loop for multiple API calls
       await Promise.all(
         quizzes.map((quiz: quiz) =>
-          axiosInstance.post("/quizCrud", {
+          axiosInstance.post("/api/quizCrud", {
             question: quiz.question,
             options: quiz.options,
             answer: quiz.answer,

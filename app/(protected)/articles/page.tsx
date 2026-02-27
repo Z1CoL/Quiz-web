@@ -1,6 +1,5 @@
 "use client";
 
-import { axiosInstance } from "@/app/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@clerk/nextjs";
@@ -8,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 // 1. Import the Loader icon
 import { Loader2, Sparkles, FileText } from "lucide-react";
+import axiosInstance from "@/app/lib/axois";
 
 export default function Home() {
   const router = useRouter();
@@ -36,7 +36,7 @@ export default function Home() {
     // 3. Start loading
     setIsLoading(true);
     try {
-      const response = await axiosInstance.post("/article", {
+      const response = await axiosInstance.post("/api/article", {
         title: title,
         content: content,
       });

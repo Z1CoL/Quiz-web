@@ -1,6 +1,7 @@
 "use client";
+import axiosInstance from "@/app/lib/axois";
 import { quiz } from "@/app/lib/type";
-import { axiosInstance } from "@/app/lib/utils";
+
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRouter } from "next/navigation";
@@ -14,7 +15,7 @@ export default function Home({ params }: { params: Promise<{ id: string }> }) {
 
   const router = useRouter();
   const getResults = async () => {
-    const results = await axiosInstance.get("/quizCrud", {
+    const results = await axiosInstance.get("/api/quizCrud", {
       params: { id },
     });
     console.log("results", results.data);

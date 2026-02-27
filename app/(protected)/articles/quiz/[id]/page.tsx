@@ -1,9 +1,10 @@
 "use client";
-import { axiosInstance } from "@/app/lib/utils";
+
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Attempt, QuizCard } from "./components/QuizCard";
 import { Skeleton } from "@/components/ui/skeleton";
+import axiosInstance from "@/app/lib/axois";
 
 export default function Home({ params }: { params: Promise<{ id: string }> }) {
   const [quizes, setQuizes] = useState([]);
@@ -34,7 +35,7 @@ export default function Home({ params }: { params: Promise<{ id: string }> }) {
   }, [qIndex]);
 
   const getQuizes = async () => {
-    const data = await axiosInstance.get("/quizCrud", { params: { id } });
+    const data = await axiosInstance.get("/api/quizCrud", { params: { id } });
     console.log("axiosed data", data);
     console.log("data", data.data);
     setQuizes(data.data ?? []);
